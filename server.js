@@ -2,6 +2,7 @@ var express = require('express');
 var mongoose = require('mongoose');
 var bodyParser = require('body-parser');
 var logger = require('morgan');
+var errorHandler = require('errorhandler')
 
 var app = express();
 var dbUri = "mongodb://localhost:27017/api";
@@ -18,7 +19,7 @@ var postSchema = new Schema ({
 	},
 	text: {
 		type: String,
-		required: true
+		requireda: true
 	}
 });
 
@@ -46,6 +47,9 @@ app.post('/posts', function(req, res, next){
 	});
 
 });
+
+app.use(errorhandler);
+
 var server = require('http').createServer(app).listen(3000);
 
 // mongoose.connect('mongodb://localhost/test');
